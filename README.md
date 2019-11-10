@@ -1,1 +1,1 @@
-# house_opengl
+# g++ in.cc -o out -lglut -lGLU -lGL
