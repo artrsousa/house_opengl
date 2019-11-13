@@ -43,6 +43,7 @@ main(int argc, char** argv)
         initHouse(); // set house dimensions in architect
         initWindow();
         initChimney();
+        initGarage();
 
         glutInit(&argc, argv);
         

@@ -13,6 +13,7 @@ void drawAxis(void);
 void initHouse(void);
 void initWindow(void);
 void drawsquare(void);
+void initGarage(void);
 void initChimney(void);
 void drawfirstfloor(void);
 
@@ -34,18 +35,28 @@ initHouse(void)
 }
 
 
-void initWindow(void)
+void 
+initWindow(void)
 {
         __window.width = 20;
         __window.height = 8;
         __window.thickness = 1;
 }
 
-void initChimney(void)
+void 
+initChimney(void)
 {
-        __chimney.height = 80;
+        __chimney.height = 110;
         __chimney.width = 15;
         __chimney.thickness = 2;
+}
+
+void
+initGarage(void)
+{
+        __garage.height = __house.height;
+        __garage.width = 70;
+        __garage.thickness = 1;
 }
 
 void

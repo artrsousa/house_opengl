@@ -32,9 +32,19 @@ __chimneydimension
         GLfloat thickness;
 };
 
+typedef struct __garagedimension __garagedimension;
+struct
+__garagedimension
+{
+        GLfloat width;
+        GLfloat height;
+        GLfloat thickness;
+};
+
 
 __housedimension __house;
 __windowdimension __window;
 __chimneydimension __chimney;
+__garagedimension __garage;
 
 #endif /* ASSETS_H */ 

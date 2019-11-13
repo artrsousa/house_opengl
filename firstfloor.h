@@ -15,8 +15,10 @@ extern __chimneydimension __chimney;
 void drawAll(void);
 
 void drawChimney(GLfloat chimneyPosition);
-void drawWalls(GLfloat window1Position, GLfloat window2Position, GLfloat windowf1Position, GLfloat windowf2Position, GLfloat chimneyPosition, GLfloat mainHalllength);
+void drawGarage(GLfloat chimneyPosition, GLfloat mainHalllength);
 void drawCeilAndFloor(GLfloat mainHalllength, GLfloat chimneyPosition);
+void drawWalls(GLfloat window1Position, GLfloat window2Position, GLfloat windowf1Position, GLfloat windowf2Position, GLfloat chimneyPosition, GLfloat mainHalllength);
+
 
 void
 drawAll(void)
@@ -41,6 +43,7 @@ drawAll(void)
 
         drawChimney(chimneyPosition);
         drawCeilAndFloor(mainHalllength, chimneyPosition);
+        drawGarage(chimneyPosition, mainHalllength);
 }
 
 void
@@ -95,12 +98,18 @@ drawWalls
                         buildFace(0, 0, 1, (__house.width / 4.05), 0.0, __house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), window1Position * 0.85 - window1Position * 0.6, __house.length - (chimneyPosition + __chimney.width + mainHalllength));
         glPopMatrix();
 
+        GLfloat wallSize = __house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength));
+        GLfloat garageDoorPosition = wallSize * 0.3;
+        GLfloat garageDoorWidth = 20;
+
         glPushMatrix();
                 glColor3f(0.0, 0.0, 1.0);
                 buildFace(1, 0, 0, (__house.width / 4.05), 0.0, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), windowf1Position, __house.height);
                 buildFace(1, 0, 0, (__house.width / 3.8) + windowf1Position + __window.width, 0.0, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), windowf2Position, __house.height);
                 buildFace(1, 0, 0, (__house.width / 3.8) + windowf1Position + __window.width + windowf2Position + __window.width, 0.0, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), __house.width - ((__house.width / 3.8) + windowf1Position + __window.width + windowf2Position + __window.width), __house.height);
-                buildFace(0, 1, 0, __house.width, 0.0, 0.0, __house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), __house.height);
+                
+                buildFace(0, 1, 0, __house.width, 0.0, 0.0, garageDoorPosition, __house.height);
+                buildFace(0, 1, 0, __house.width, 0.0, garageDoorPosition + garageDoorWidth, (__house.length - (garageDoorPosition + garageDoorWidth)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), __house.height);
         glPopMatrix();    
 };
 
@@ -130,6 +139,33 @@ drawCeilAndFloor
                 glColor3f(0.0, 0.0, 0.0);
                 buildFace(0, 0, 1, 0.0, 0.0, 0.0, __house.width,  __house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)));
                 buildFace(0, 0, 1, 0.0, __house.height, 0.0, __house.width,  __house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)));
+        glPopMatrix();
+}
+
+void
+drawGarage
+(
+        GLfloat chimneyPosition, 
+        GLfloat mainHalllength
+)
+{
+        glPushMatrix();
+                glColor3f(0.5, 0.5, 0.0);
+                buildFace(1, 0, 0, __house.width, 0.0, 0.0, __garage.width, __garage.height);
+                buildFace(0, 1, 0, __house.width + __garage.width, 0.0, 0.0, (__house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength))) + __garage.width, __garage.height);
+                buildFace(1, 0, 0, __house.width, 0.0, (__house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength))) + __garage.width, __garage.width, __garage.height);
+        glPopMatrix();
+
+        glPushMatrix();
+                buildFace(0, 1, 0, __house.width, 0.0, __house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), __garage.width * 0.15, __house.height);
+                buildFace(0, 1, 0, __house.width, 0.0, (__house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)) + __garage.width * 0.85), __garage.width * 0.15, __house.height);
+        glPopMatrix();
+
+        glPushMatrix(); //roof and ceil of garage
+                glColor3f(0.0, 0.0, 0.0);
+                buildFace(0, 0, 1, __house.width, 0.0, 0.0, __garage.width, (__house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)) + __garage.width));
+                glTranslatef(0.0, __house.height, 0.0);
+                        buildFace(0, 0, 1, __house.width, 0.0, 0.0, __garage.width, (__house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)) + __garage.width));
         glPopMatrix();
 }
 
