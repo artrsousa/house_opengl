@@ -47,10 +47,9 @@ drawHandler(void)
 
         drawAxis();
 
-        if(flagA){
-                drawFirstFloor();
-            }
-        
+        drawFirstFloor(flagA);
+            
+
         // drawFirstFloor();
         // drawWalls();
 

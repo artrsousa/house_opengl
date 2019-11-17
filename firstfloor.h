@@ -23,9 +23,12 @@ void drawCeilAndFloor(GLfloat mainHalllength, GLfloat chimneyPosition);
 void drawWalls(GLfloat window1Position, GLfloat window2Position, GLfloat windowf1Position, GLfloat windowf2Position, GLfloat chimneyPosition, GLfloat mainHalllength);
 
 
+bool flag_A;
+
 void
-drawAll(void)
+drawAll(bool flagA)
 {
+        flag_A = flagA;
         GLfloat window1Position = __house.width * 0.07;
         GLfloat window2Position = __house.width * 0.5;
 
@@ -202,7 +205,10 @@ drawWalls
         glPopMatrix();
 
         //Janelas
+
         glPushMatrix();
+
+                if(flag_A){
                 glColor3f(0.1f,0.0f,0.0f);
                 
                 //janela 1, dobradiça esquerda
@@ -216,6 +222,9 @@ drawWalls
                 
                 //janela 2, dobradiça direita
                 buildFace(1, 0, 0, (__house.width / 4.05) + __window.width/2 +windowf1Position + windowf2Position + __window.width, __house.height/2, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), __window.width/2, (__house.height/2));
+
+                glRotatef(45,0,0,30);
+                }
 
         glPopMatrix();
 

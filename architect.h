@@ -56,9 +56,9 @@ initGarage(void)
 }
 
 void
-drawFirstFloor(void)
+drawFirstFloor(bool flagA)
 {
-        drawAll();
+        drawAll(flagA);
 }
 
 void
