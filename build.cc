@@ -131,7 +131,7 @@ initEnvironment(void)
         glEnable(GL_LIGHT0);
         glEnable(GL_DEPTH_TEST);
 
-        __env.obsZ = 300;
+        __env.obsZ = 400;
         __env.angle = 45;
         __env.rotX = __env.rotY = 0;
         __env.obsX = __env.obsY = 0;

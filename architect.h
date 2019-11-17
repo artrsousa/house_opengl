@@ -17,10 +17,6 @@ void initGarage(void);
 void initChimney(void);
 void drawfirstfloor(void);
 
-// void drawRoof(void);
-// void drawCeil(void);
-// void drawFloor(void);
-// void drawWalls(void);
  
 void
 initHouse(void)
@@ -55,14 +51,13 @@ void
 initGarage(void)
 {
         __garage.height = __house.height;
-        __garage.width = 70;
+        __garage.width = 100;
         __garage.thickness = 1;
 }
 
 void
 drawFirstFloor(void)
 {
-        // drawStructure();
         drawAll();
 }
 
