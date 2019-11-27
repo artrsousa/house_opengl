@@ -35,7 +35,10 @@ drawAll(void)
         GLfloat chimneyPosition = __house.length * 0.4;
         GLfloat mainHalllength = __house.width * 0.15; 
 
-        drawRoof(chimneyPosition, mainHalllength);
+        drawRoof(
+                chimneyPosition, 
+                mainHalllength
+        );
 
         drawWalls(
                 window1Position,
@@ -120,6 +123,28 @@ drawRoof
                         glVertex3f((__house.width + __garage.width ) + over, (__house.height - 5) + hip, (__house.length - over * 2) - (__house.length / 2) + over);
                 glEnd();  
         glPopMatrix();
+
+        GLfloat interval = (__house.width / 4.05) - ((__house.width * 0.07) * 0.85);
+        GLfloat heig = __house.height + 25;
+
+        GLfloat hipfront = sqrt(pow(20, 2) + pow(interval, 2)) - 0.25;
+
+        glPushMatrix();
+                glColor3f(1.0, 1.0, 0.5);
+                glTranslatef((__house.width / 3.78) + 5, __house.height - 5, chimneyPosition + __chimney.width + mainHalllength);
+                glRotatef(angle - 2.5, 0, 0, 1);
+                glTranslatef( - ((__house.width / 3.78) + 5), - (__house.height - 5), -(chimneyPosition + __chimney.width + mainHalllength));
+                buildFace(0, 1, 0, (__house.width / 3.78) + 5, __house.height - 5, chimneyPosition + __chimney.width + mainHalllength - 50, __house.length - (chimneyPosition + __chimney.width + mainHalllength) + 55, hipfront);
+        glPopMatrix();
+
+        glPushMatrix();
+                glColor3f(1.0, 1.0, 0.5);
+                glTranslatef(((__house.width * 0.07) * 0.6) - 5, (__house.height - 5), (chimneyPosition + __chimney.width + mainHalllength));
+                glRotatef(- (angle - 2.5), 0, 0, 1); 
+                glTranslatef(- (((__house.width * 0.07) * 0.6) - 5), - (__house.height - 5), - (chimneyPosition + __chimney.width + mainHalllength));
+                buildFace(0, 1, 0, ((__house.width * 0.07) * 0.6) - 5, __house.height - 5, chimneyPosition + __chimney.width + mainHalllength - 50, __house.length - (chimneyPosition + __chimney.width + mainHalllength) + 55, hipfront);
+        glPopMatrix();
+
 }     
 
 
