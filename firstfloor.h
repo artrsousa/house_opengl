@@ -221,12 +221,9 @@ drawWalls
                 //parede - janela2
                 buildFace(1, 0, 0, (__house.width / 4.05) + windowf1Position + windowf2Position + __window.width, 0.0, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), __window.width, (__house.height/2));
                 buildFace(1, 0, 0, (__house.width / 4.05) + windowf1Position + __window.width + windowf2Position + __window.width, 0.0, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), __house.width - ((__house.width / 4.05) + windowf1Position + __window.width + windowf2Position + __window.width), __house.height);
-                buildFace(0, 1, 0, __house.width, 0.0, 0.0, garageDoorPosition, __house.height);
-                buildFace(0, 1, 0, __house.width, 0.0, garageDoorPosition + garageDoorWidth, (__house.length - (garageDoorPosition + garageDoorWidth)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), __house.height);
         glPopMatrix();
 
         //Janelas
-
         // glPushMatrix();
 
         //         if(flag_A)
@@ -248,7 +245,6 @@ drawWalls
         //         }
 
         // glPopMatrix();
-
 
 };
 
