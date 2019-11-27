@@ -29,6 +29,8 @@ __environment
 __environment __env; // environment variables 
 extern __housedimension __house; // house dimension from drawer
 
+static bool flagA = false;
+
 
 void drawHandler(void);
 void motionHandler(int x, int y);
@@ -37,31 +39,6 @@ void setVisualizationParameters(void);
 void windowReshape(GLsizei w, GLsizei h);
 void mouseHandler(int button, int state, int x, int y);
 
-int 
-main(int argc, char** argv)
-{
-        initHouse(); // set house dimensions in architect
-        initWindow();
-        initChimney();
-        initGarage();
-
-        glutInit(&argc, argv);
-        
-        glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-        glutInitWindowSize(900, 700);
-        glutCreateWindow("House");
-
-        glutReshapeFunc(windowReshape);
-        glutMouseFunc(mouseHandler);
-        glutMotionFunc(motionHandler);
-        
-        initEnvironment();
-
-        glutDisplayFunc(drawHandler);
-
-        glutMainLoop();
-}
-
 void 
 drawHandler(void)
 {
@@ -69,7 +46,11 @@ drawHandler(void)
         glClear(GL_COLOR_BUFFER_BIT); 
 
         drawAxis();
-        drawFirstFloor(); 
+
+        drawFirstFloor(flagA);
+            
+
+        // drawFirstFloor();
         // drawWalls();
 
         glutSwapBuffers();
@@ -174,6 +155,22 @@ windowReshape
         setVisualizationParameters();
 }
 
+static void key(unsigned char key, int x, int y){
+            switch (key){
+                case 27 : 
+                case 'a':
+                    if (flagA){
+                        flagA = false;
+                        break;
+                    }
+                    else{
+                        flagA = true;
+                        break;
+                    }              
+            }
+            glutPostRedisplay();
+}
+
 void 
 mouseHandler
 (
@@ -209,6 +206,32 @@ mouseHandler
 
         setVisualizationParameters();
         glutPostRedisplay();
+}
+
+int 
+main(int argc, char** argv)
+{
+        initHouse(); // set house dimensions in architect
+        initWindow();
+        initChimney();
+        initGarage();
+
+        glutInit(&argc, argv);
+        
+        glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+        glutInitWindowSize(900, 700);
+        glutCreateWindow("House");
+
+        glutReshapeFunc(windowReshape);
+        glutMouseFunc(mouseHandler);
+        glutKeyboardFunc(key);
+        glutMotionFunc(motionHandler);
+        
+        initEnvironment();
+
+        glutDisplayFunc(drawHandler);
+
+        glutMainLoop();
 }
 
 #endif /* PRIMARY_HOUSE */
