@@ -213,45 +213,41 @@ drawWalls
        glPushMatrix();
                 glColor3f(0.0, 0.0, 1.0);
                 buildFace(1, 0, 0, (__house.width / 4.05), 0.0, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), windowf1Position, __house.height);
-                
+        
                 //parede - janela1
                 buildFace(1, 0, 0, (__house.width / 4.05) + windowf1Position, 0.0, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), (__window.width), (__house.height/2));
-                
                 buildFace(1, 0, 0, (__house.width / 4.05) + windowf1Position + __window.width, 0.0, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), windowf2Position, __house.height);
-                
                 
                 //parede - janela2
                 buildFace(1, 0, 0, (__house.width / 4.05) + windowf1Position + windowf2Position + __window.width, 0.0, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), __window.width, (__house.height/2));
-
                 buildFace(1, 0, 0, (__house.width / 4.05) + windowf1Position + __window.width + windowf2Position + __window.width, 0.0, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), __house.width - ((__house.width / 4.05) + windowf1Position + __window.width + windowf2Position + __window.width), __house.height);
-
                 buildFace(0, 1, 0, __house.width, 0.0, 0.0, garageDoorPosition, __house.height);
                 buildFace(0, 1, 0, __house.width, 0.0, garageDoorPosition + garageDoorWidth, (__house.length - (garageDoorPosition + garageDoorWidth)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), __house.height);
         glPopMatrix();
 
         //Janelas
 
-        glPushMatrix();
+        // glPushMatrix();
 
-                if(flag_A){
-                glColor3f(0.1f,0.0f,0.0f);
-                
-                //janela 1, dobradiça esquerda
-                buildFace(1, 0, 0, (__house.width / 4.05) + windowf1Position, __house.height/2, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), (__window.width/2), (__house.height/2));
-                
-                //janela 1, dobradiça direita
-                buildFace(1, 0, 0, (__house.width / 4.05) +__window.width/2 + windowf1Position, __house.height/2, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), (__window.width/2), (__house.height/2));
-                
-                //janela 2, dobradiça esquerda
-                buildFace(1, 0, 0, (__house.width / 4.05) + windowf1Position + windowf2Position + __window.width, __house.height/2, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), __window.width/2, (__house.height/2));
-                
-                //janela 2, dobradiça direita
-                buildFace(1, 0, 0, (__house.width / 4.05) + __window.width/2 +windowf1Position + windowf2Position + __window.width, __house.height/2, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), __window.width/2, (__house.height/2));
+        //         if(flag_A)
+        //         {
+        //                 glColor3f(0.1f,0.0f,0.0f);
+                        
+        //                 //janela 1, dobradiça esquerda
+        //                 buildFace(1, 0, 0, (__house.width / 4.05) + windowf1Position, __house.height/2, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), (__window.width/2), (__house.height/2));
+                        
+        //                 //janela 1, dobradiça direita
+        //                 buildFace(1, 0, 0, (__house.width / 4.05) +__window.width/2 + windowf1Position, __house.height/2, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), (__window.width/2), (__house.height/2));
+                        
+        //                 //janela 2, dobradiça esquerda
+        //                 buildFace(1, 0, 0, (__house.width / 4.05) + windowf1Position + windowf2Position + __window.width, __house.height/2, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), __window.width/2, (__house.height/2));
+                        
+        //                 //janela 2, dobradiça direita
+        //                 buildFace(1, 0, 0, (__house.width / 4.05) + __window.width/2 +windowf1Position + windowf2Position + __window.width, __house.height/2, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), __window.width/2, (__house.height/2));
 
-                glRotatef(45,0,0,30);
-                }
+        //         }
 
-        glPopMatrix();
+        // glPopMatrix();
 
 
 };
