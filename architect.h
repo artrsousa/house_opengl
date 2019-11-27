@@ -7,7 +7,7 @@
 #include "assets.h"
 #include "firstfloor.h"
 
-extern __housedimension __house;
+//extern __housedimension __house;
 
 void drawAxis(void);
 void initHouse(void);
@@ -56,9 +56,17 @@ initGarage(void)
 }
 
 void
-drawFirstFloor(bool flagA)
+initAngles(void)
 {
-        drawAll(flagA);
+        __angles.doortetha = 0;
+        __angles.windowtetha = 0;
+}
+
+
+void
+drawFirstFloor()
+{
+        drawAll();
 }
 
 void

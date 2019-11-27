@@ -5,6 +5,7 @@
 
 #include <stdio.h> 
 #include <stdlib.h>
+#include <iostream>
 
 #include "assets.h"
 #include "architect.h"
@@ -27,9 +28,9 @@ __environment
 
 
 __environment __env; // environment variables 
-extern __housedimension __house; // house dimension from drawer
 
-static bool flagA = false;
+extern __globalangles __angles; // angles controller from assets
+extern __housedimension __house; // house dimension from drawer
 
 
 void drawHandler(void);
@@ -37,7 +38,9 @@ void motionHandler(int x, int y);
 void initEnvironment(void);
 void setVisualizationParameters(void);
 void windowReshape(GLsizei w, GLsizei h);
+void keyboardHandler(unsigned char key, int x, int y);
 void mouseHandler(int button, int state, int x, int y);
+
 
 void 
 drawHandler(void)
@@ -47,11 +50,7 @@ drawHandler(void)
 
         drawAxis();
 
-        drawFirstFloor(flagA);
-            
-
-        // drawFirstFloor();
-        // drawWalls();
+        drawFirstFloor();
 
         glutSwapBuffers();
 }
@@ -155,22 +154,6 @@ windowReshape
         setVisualizationParameters();
 }
 
-static void key(unsigned char key, int x, int y){
-            switch (key){
-                case 27 : 
-                case 'a':
-                    if (flagA){
-                        flagA = false;
-                        break;
-                    }
-                    else{
-                        flagA = true;
-                        break;
-                    }              
-            }
-            glutPostRedisplay();
-}
-
 void 
 mouseHandler
 (
@@ -180,15 +163,6 @@ mouseHandler
         int y
 )
 {
-        /*if (button == GLUT_LEFT_BUTTON)
-                if (state == GLUT_DOWN) {  // Zoom-in
-                        if (angle >= 10) angle -= 5;
-                }
-        if (button == GLUT_RIGHT_BUTTON)
-                if (state == GLUT_DOWN) {  // Zoom-out
-                        if (angle <= 130) angle += 5;
-                }*/
-
         if(state == GLUT_DOWN)
         {
                 __env.x_ini = x;
@@ -208,6 +182,33 @@ mouseHandler
         glutPostRedisplay();
 }
 
+void 
+keyboardHandler
+(
+        unsigned char key, 
+        int x, 
+        int y
+)
+{
+        switch(key)
+        {
+                case 97:
+                        if(__angles.doortetha < 136)
+                                __angles.doortetha += 1.5;
+                        break;
+                case 100:
+                        if(__angles.doortetha > 0)
+                                __angles.doortetha += - 1.5;
+
+                        break;
+                default:
+                        break;
+        }
+
+
+        glutPostRedisplay();
+}
+
 int 
 main(int argc, char** argv)
 {
@@ -220,16 +221,16 @@ main(int argc, char** argv)
         
         glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
         glutInitWindowSize(900, 700);
-        glutCreateWindow("House");
-
-        glutReshapeFunc(windowReshape);
-        glutMouseFunc(mouseHandler);
-        glutKeyboardFunc(key);
-        glutMotionFunc(motionHandler);
-        
-        initEnvironment();
+        glutCreateWindow("Fabio's House");
 
         glutDisplayFunc(drawHandler);
+        glutReshapeFunc(windowReshape);
+
+        glutMouseFunc(mouseHandler);
+        glutMotionFunc(motionHandler);
+        glutKeyboardFunc(keyboardHandler);
+        
+        initEnvironment();
 
         glutMainLoop();
 }

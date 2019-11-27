@@ -41,10 +41,19 @@ __garagedimension
         GLfloat thickness;
 };
 
+typedef struct __globalangles __globalangles;
+struct
+__globalangles
+{
+        GLfloat doortetha;
+        GLfloat windowtetha;
+};
+
 
 __housedimension __house;
 __windowdimension __window;
 __chimneydimension __chimney;
 __garagedimension __garage;
+__globalangles __angles;
 
 #endif /* ASSETS_H */ 
