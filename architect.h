@@ -34,7 +34,7 @@ initHouse(void)
 void 
 initWindow(void)
 {
-        __window.width = 20;
+        __window.width = 25;
         __window.height = 8;
         __window.thickness = 1;
 }
@@ -56,9 +56,9 @@ initGarage(void)
 }
 
 void
-drawFirstFloor(void)
+drawFirstFloor(bool flagA)
 {
-        drawAll();
+        drawAll(flagA);
 }
 
 void
