@@ -35,7 +35,7 @@ void
 initWindow(void)
 {
         __window.width = 25;
-        __window.height = 8;
+        __window.height = 22;
         __window.thickness = 1;
 }
 
@@ -60,6 +60,7 @@ initAngles(void)
 {
         __angles.doortetha = 0;
         __angles.windowtetha = 0;
+        __angles.garagetetha = 0;
 }
 
 

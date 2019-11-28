@@ -1,1 +1,1 @@
-# g++ in.cc -o out -lglut -lGLU -lGL
+g++ build.cc -o out -lglut -lGLU -lGL

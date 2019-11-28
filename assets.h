@@ -47,6 +47,7 @@ __globalangles
 {
         GLfloat doortetha;
         GLfloat windowtetha;
+        GLfloat garagetetha;
 };
 
 

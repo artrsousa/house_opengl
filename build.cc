@@ -199,7 +199,22 @@ keyboardHandler
                 case 100:
                         if(__angles.doortetha > 0)
                                 __angles.doortetha += - 1.5;
-
+                        break;
+                case 115:
+                        if(__angles.windowtetha < 140)
+                                __angles.windowtetha += 1.5;
+                        break;
+                case 102:     
+                        if(__angles.windowtetha > 0)
+                                __angles.windowtetha += - 1.5;  
+                        break;
+                case 103:
+                        if(__angles.garagetetha < 85)
+                                __angles.garagetetha += 1.5;
+                        break;
+                case 104:
+                        if(__angles.garagetetha > 0)
+                                __angles.garagetetha += - 1.5;
                         break;
                 default:
                         break;
