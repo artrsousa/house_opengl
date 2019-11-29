@@ -40,38 +40,41 @@ drawAll()
         GLfloat chimneyPosition = __house.length * 0.4;
         GLfloat mainHalllength = __house.width * 0.15; 
 
-        drawRoof(
-                chimneyPosition, 
-                mainHalllength
-        );
+        glPushMatrix();
+                drawRoof(
+                        chimneyPosition, 
+                        mainHalllength
+                );
 
-        drawWalls(
-                window1Position,
-                window2Position,
-                windowf1Position,
-                windowf2Position,
-                chimneyPosition,
-                mainHalllength
-        );
+                drawDoor(
+                        chimneyPosition, 
+                        mainHalllength
+                );
 
-        drawDoor(
-                chimneyPosition, 
-                mainHalllength
-        );
+                drawWindows(
+                        window1Position,
+                        window2Position,
+                        windowf1Position,
+                        windowf2Position,
+                        chimneyPosition,
+                        mainHalllength
+                );
 
-        drawWindows(
-                window1Position,
-                window2Position,
-                windowf1Position,
-                windowf2Position,
-                chimneyPosition,
-                mainHalllength
-        );
+                drawChimney(chimneyPosition);
+                drawGarage(chimneyPosition, mainHalllength);
+                drawGarageDoor(chimneyPosition, mainHalllength);
+                drawCeilAndFloor(mainHalllength, chimneyPosition);
 
-        drawChimney(chimneyPosition);
-        drawGarage(chimneyPosition, mainHalllength);
-        drawGarageDoor(chimneyPosition, mainHalllength);
-        drawCeilAndFloor(mainHalllength, chimneyPosition);
+                drawWalls(
+                        window1Position,
+                        window2Position,
+                        windowf1Position,
+                        windowf2Position,
+                        chimneyPosition,
+                        mainHalllength
+                );
+        glPopMatrix();
+        
 }
 
 void
@@ -166,7 +169,7 @@ drawRoof
         glPopMatrix();
 
         glPushMatrix();
-                glColor3f(1.0, 0.0, 0.0);
+                glColor3f(0.0588, 0.0, 0.4392); 
                 glBegin(GL_TRIANGLES);
                         glVertex3f(((__house.width * 0.07) * 0.6), __house.height, __house.length);
                         glVertex3f(__house.width / 3.78, __house.height, __house.length);
@@ -175,7 +178,7 @@ drawRoof
         glPopMatrix();
 
         glPushMatrix();
-                glColor3f(1.0, 0.0, 0.0);
+                glColor3f(0.0588, 0.0, 0.4392); 
                 buildFace(1, 0, 0, ((__house.width * 0.07) * 0.85), __house.height - 10, __house.length, interval, 10);
         glPopMatrix();
 }     
@@ -189,17 +192,22 @@ drawDoor(
         GLfloat interval = (__house.width / 4.05) - ((__house.width * 0.07) * 0.85);
 
         glPushMatrix();
+                glColor3f(0.4862, 0.4862, 0.4862);
+
                 glTranslatef( (__house.width / 4.05), 0.0, (__house.length));
                 glRotatef(__angles.doortetha, 0, 1, 0);
                 glTranslatef( - (__house.width / 4.05), 0.0, - (__house.length));
-                glColor3f(0.0, 0.0, 0.0);
                 buildFace(1, 0, 0, __house.width / 4.05, 0.0, __house.length, - interval, __house.height - 10);
                 
                 glTranslatef(((__house.width * 0.07) * 0.85) + 5, (__house.height / 2) - 5, __house.length + 1.5);
-                glColor3f(0.7, 0.0, 0.0);
+                glColor3f(1.0, 1.0, 1.0);
                 glutSolidSphere(2, 50, 50);
         glPopMatrix();
 
+        glPushMatrix();
+                glColor3f(0.0, 0.0, 0.0);
+                buildFace(0, 0, 1, __house.width / 4.05, 0.0, __house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)) - 5, - interval, 20);
+        glPopMatrix();
 }
 
 
@@ -215,33 +223,49 @@ drawWalls
 )
 {
         glPushMatrix(); //back
-                glColor3f(1.0, 0.0, 0.0); 
+                glColor3f(0.0588, 0.0, 0.4392); 
                 buildFace(1, 0, 0, 0.0, 0.0, 0.0, window1Position, __house.height);
-                // buildFace(1, 0, 0, window1Position + __window.width, 0.0, 0.0, window2Position - (window1Position + __window.width), __house.height);
                 buildFace(1, 0, 0, window2Position + __window.width, 0.0, 0.0, __house.width - (window2Position + __window.width), __house.height);
         glPopMatrix();
 
         glPushMatrix();
-                glColor3f(1.0, 0.0, 0.0);
+                glColor3f(0.0588, 0.0, 0.4392); 
                 buildFace(0, 1, 0, 0.0, 0.0, 0.0, chimneyPosition, __house.height);
                 buildFace(0, 1, 0, 0.0, 0.0, chimneyPosition + __chimney.width, (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), __house.height);
+                
                 buildFace(1, 0, 0, 0.0, 0.0, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), window1Position * 0.85, __house.height);
-
                 buildFace(0, 1, 0, window1Position * 0.6, 0.0, chimneyPosition + __chimney.width + mainHalllength, __house.length - (chimneyPosition + __chimney.width + mainHalllength), __house.height);
                 buildFace(0, 1, 0, window1Position * 0.85, 0.0, chimneyPosition + __chimney.width + mainHalllength, __house.length - (chimneyPosition + __chimney.width + mainHalllength), __house.height);
         glPopMatrix();
 
         glPushMatrix();
+                glColor3f(0.0588, 0.0, 0.4392); 
+                glBegin(GL_TRIANGLES);
+                        glVertex3f(0.0, __house.height + 2.65, 0.0);
+                        glVertex3f(0.0, __house.height + 2.65, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)));
+                        glVertex3f(0.0, (__house.height * 2) - 2.3, (chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength))) / 2);
+                glEnd();
+        glPopMatrix();
+
+        glPushMatrix();
+                glColor3f(1.0, 1.0, 1.0);
+                buildFace(0, 1, 0, 0.0, __house.height, 0.0, (chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength))), 2.65);
+        glPopMatrix();
+
+        glPushMatrix();
+                glColor3f(0.0588, 0.0, 0.4392); 
                 glTranslatef(__house.width / 4.05, 0.0, 0.0);
                         buildFace(0, 1, 0, 0.0, 0.0, chimneyPosition + __chimney.width + mainHalllength, __house.length - (chimneyPosition + __chimney.width + mainHalllength), __house.height);
         glPopMatrix();
 
         glPushMatrix();
+                glColor3f(0.0588, 0.0, 0.4392); 
                 glTranslatef(__house.width / 3.785, 0.0, 0.0);
                         buildFace(0, 1, 0, 0.0, 0.0, chimneyPosition + __chimney.width + mainHalllength, __house.length - (chimneyPosition + __chimney.width + mainHalllength), __house.height);
         glPopMatrix();
 
         glPushMatrix();
+                glColor3f(0.0588, 0.0, 0.4392); 
                 buildFace(0, 0, 1, window1Position * 0.6, 0.0, __house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), window1Position * 0.85 - window1Position * 0.6, __house.length - (chimneyPosition + __chimney.width + mainHalllength));
                 buildFace(1, 0, 0, window1Position * 0.6, 0.0, __house.length, window1Position * 0.85 - window1Position * 0.6, __house.height);
                 glTranslatef(0.0, __house.height, 0.0);
@@ -249,6 +273,7 @@ drawWalls
         glPopMatrix();
 
         glPushMatrix();
+                glColor3f(0.0588, 0.0, 0.4392); 
                 buildFace(0, 0, 1, (__house.width / 4.05), 0.0, __house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), window1Position * 0.85 - window1Position * 0.6, __house.length - (chimneyPosition + __chimney.width + mainHalllength));
                 buildFace(1, 0, 0, (__house.width / 4.05), 0.0, __house.length, window1Position * 0.85 - window1Position * 0.6, __house.height);
                 glTranslatef(0.0, __house.height, 0.0);
@@ -263,7 +288,7 @@ drawWalls
 
        //parede Azul 
        glPushMatrix();
-                glColor3f(0.0, 0.0, 1.0);
+                glColor3f(0.0588, 0.0, 0.4392); 
                 buildFace(1, 0, 0, (__house.width / 4.05), 0.0, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), windowf1Position, __house.height);
         
                 //wall - window1
@@ -278,6 +303,11 @@ drawWalls
                 buildFace(1, 0, 0, (__house.width / 4.05) + windowf1Position + __window.width + windowf2Position + __window.width, 0.0, chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), __house.width - ((__house.width / 4.05) + windowf1Position + __window.width + windowf2Position + __window.width), __house.height);
         glPopMatrix();
 
+        glPushMatrix();
+                glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                glColor4f(0.5098039, 1.0, 1.0, 0.5);
+                buildFace(1, 0, 0, window1Position, 0.0, 0.0, window2Position + __window.width - window1Position, __house.height);
+        glPopMatrix();
 };
 
 void
@@ -287,7 +317,7 @@ drawChimney
 )
 {
         glPushMatrix();
-                glColor3f(0.0, 1.0, 0.0);
+                glColor3f(0.3647, 0.2156, 0.1333);
                 buildFace(0, 1, 0, -__chimney.width / 2, 0, chimneyPosition, __chimney.width, __chimney.height);
                 buildFace(1, 0, 0, -__chimney.width / 2, 0, chimneyPosition, __chimney.width, __chimney.height);
                 buildFace(1, 0, 0, -__chimney.width / 2, 0, chimneyPosition + __chimney.width, __chimney.width, __chimney.height);
@@ -308,7 +338,7 @@ drawWindows
 {
         // window1 left
         glPushMatrix();
-                glColor3f(1.0, 1.0, 0.0);
+                glColor3f(0.4862, 0.4862, 0.4862);
                 glTranslatef(((__house.width / 4.05) + windowf1Position), ((__house.height/2) - 5), (chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength))));
                 glRotatef( - __angles.windowtetha, 0, 1, 0);
                 glTranslatef(- ((__house.width / 4.05) + windowf1Position), - ((__house.height/2) - 5), - (chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength))));
@@ -317,7 +347,7 @@ drawWindows
 
         // window 1 right
         glPushMatrix();
-                glColor3f(1.0, 1.0, 0.0);
+                glColor3f(0.4862, 0.4862, 0.4862);
                 glTranslatef( ((__house.width / 4.05) + windowf1Position + __window.width), ((__house.height/2) - 5), (chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength))));
                 glRotatef(__angles.windowtetha, 0, 1, 0);
                 glTranslatef( - ((__house.width / 4.05) + windowf1Position + __window.width), - ((__house.height/2) - 5), - (chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength))));
@@ -326,8 +356,7 @@ drawWindows
 
         // window2 left
         glPushMatrix();
-                glColor3f(1.0, 1.0, 0.0);
-
+                glColor3f(0.4862, 0.4862, 0.4862);
                 glTranslatef( ((__house.width / 4.05) + windowf1Position + __window.width + windowf2Position), ((__house.height/2) - 5), (chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength))));
                 glRotatef( - __angles.windowtetha, 0, 1, 0);
                 glTranslatef( - ((__house.width / 4.05) + windowf1Position + __window.width + windowf2Position), - ((__house.height/2) - 5), - (chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength))));
@@ -336,8 +365,7 @@ drawWindows
 
         // window2 right
         glPushMatrix(); 
-                glColor3f(1.0, 1.0, 0.0);
-
+                glColor3f(0.4862, 0.4862, 0.4862);
                 glTranslatef( ((__house.width / 4.05) + windowf1Position + __window.width + windowf2Position + __window.width), ((__house.height/2) - 5), (chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength))));
                 glRotatef(__angles.windowtetha, 0, 1, 0);
                 glTranslatef( - ((__house.width / 4.05) + windowf1Position + __window.width + windowf2Position + __window.width), - ((__house.height/2) - 5), - (chimneyPosition + __chimney.width + (__house.length - (chimneyPosition + __chimney.width)) - (__house.length - (chimneyPosition + __chimney.width + mainHalllength))));
@@ -355,7 +383,7 @@ drawCeilAndFloor
         glPushMatrix();
                 glColor3f(0.0, 0.0, 0.0);
                 buildFace(0, 0, 1, 0.0, 0.0, 0.0, __house.width,  __house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)));
-                buildFace(0, 0, 1, 0.0, __house.height, 0.0, __house.width,  __house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)));
+                buildFace(0, 0, 1, 0.0, __house.height - 5, 0.0, __house.width,  __house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)));
         glPopMatrix();
 }
 
@@ -367,15 +395,14 @@ drawGarage
 )
 {
         glPushMatrix();
-                glColor3f(0.5, 0.5, 0.0);
+                glColor3f(0.0588, 0.0, 0.4392); 
                 buildFace(1, 0, 0, __house.width, 0.0, 0.0, __garage.width + 2.62, __garage.height);
                 buildFace(0, 1, 0, __house.width + __garage.width + 2.62, 0.0, 0.0, (__house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength))) + __garage.width, __garage.height);
                 buildFace(1, 0, 0, __house.width - 2.62, 0.0, (__house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength))) + __garage.width, __garage.width + (2.62 * 2), __garage.height);
         glPopMatrix();
 
         glPushMatrix();
-                glColor3f(0.5, 0.5, 0.0);
-                // buildFace(1, 0, 0, __house.width, __house.height, (__house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength))) + __garage.width, __garage.width, __garage.height);
+                glColor3f(0.0588, 0.0, 0.4392); 
                 glBegin(GL_TRIANGLES);
                         glVertex3f(__house.width - 2.62, __house.height, (__house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength))) + __garage.width);
                         glVertex3f(__house.width + __garage.width + 2.62, __house.height, (__house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength))) + __garage.width);
@@ -384,7 +411,7 @@ drawGarage
         glPopMatrix();
 
         glPushMatrix();
-                glColor3f(0.5, 0.5, 0.0);
+                glColor3f(0.0588, 0.0, 0.4392); 
                 buildFace(0, 1, 0, __house.width - 2.62, 0.0, (__house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)) + __garage.width * 0.85), __garage.width * 0.15, __house.height);
                 buildFace(0, 1, 0, __house.width - 2.62, 0.0, __house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)), __garage.width * 0.15, __house.height);
                 buildFace(0, 1, 0, __house.width - 2.62, __house.height - 10, (__house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)) + __garage.width * 0.85), - __garage.width * 0.7, 10);
@@ -392,9 +419,9 @@ drawGarage
 
         glPushMatrix(); //roof and ceil of garage
                 glColor3f(0.0, 0.0, 0.0);
-                buildFace(0, 0, 1, __house.width, 0.0, 0.0, __garage.width, (__house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)) + __garage.width));
-                glTranslatef(0.0, __house.height, 0.0);
-                        buildFace(0, 0, 1, __house.width, 0.0, 0.0, __garage.width, (__house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)) + __garage.width));
+                buildFace(0, 0, 1, __house.width - 2.62, 0.0, 0.0, __garage.width + 2.62 * 2, (__house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)) + __garage.width));
+                glTranslatef(-2.62, __house.height - 5, 0.0);
+                        buildFace(0, 0, 1, __house.width, 0.0, 0.0, __garage.width + 2.62, (__house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)) + __garage.width));
         glPopMatrix();
 }
 
@@ -405,7 +432,7 @@ drawGarageDoor(
 )
 {
         glPushMatrix();
-                glColor3f(1.0, 0.0, 0.0);
+                glColor3f(0.4862, 0.4862, 0.4862);
                 glTranslatef(__angles.garagetetha * 0.3, 0.0, 0.0);
                 glPushMatrix();
                         glTranslatef(__house.width - 2.62, __house.height - 10, (__house.length - (__house.length - (chimneyPosition + __chimney.width + mainHalllength)) + __garage.width * 0.85));

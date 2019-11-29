@@ -85,11 +85,11 @@ void
 initEnvironment(void)
 { 
         GLfloat difuselight[] = {0.7, 0.7, 0.7, 1.0};          // "cor" 
-        GLfloat ambientlight[] = {0.2, 0.2, 0.2, 1.0}; 
+        GLfloat ambientlight[] = {0.3, 0.3, 0.3, 1.0}; 
         GLfloat specularlight[] = {1.0, 1.0, 1.0, 1.0};// "brilho" 
-        GLfloat lightposition[] = {0.0, 20.0, 20.0, 1.0};
+        GLfloat lightposition[] = {0.0, 20.0, - 100.0, 1.0};
 
-        GLfloat speculatity[] = {1.0,1.0,1.0,1.0}; 
+        GLfloat speculatity[] = {1.0, 1.0, 1.0, 1.0}; 
         GLint specularmaterial = 60;
 
         glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -110,6 +110,7 @@ initEnvironment(void)
         glEnable(GL_LIGHTING);  
         glEnable(GL_LIGHT0);
         glEnable(GL_DEPTH_TEST);
+        glEnable(GL_BLEND);
 
         __env.obsZ = 400;
         __env.angle = 45;
@@ -129,9 +130,6 @@ setVisualizationParameters(void)
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 
-        // Especifica posição do observador e do alvo
-        //gluLookAt(0,80,200, 0,0,0, 0,1,0);
-        //gluLookAt(obsX, obsY, obsZ, 0,0,0, 0,1,0);
         glTranslatef(-__env.obsX, -__env.obsY, -__env.obsZ);
         glRotatef(__env.rotX, 1, 0,0);
         glRotatef(__env.rotY, 0, 1,0); 
